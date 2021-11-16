@@ -1,0 +1,11 @@
+{
+	"include": [
+		"source/main.ts"
+	],
+	"compilerOptions": {
+		"declaration": true,
+		"esModuleInterop": true,
+		"outDir": "dist/",
+		"target": "es6"
+	}
+}

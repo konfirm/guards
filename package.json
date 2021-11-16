@@ -1,0 +1,38 @@
+{
+	"name": "@konfirm/guard",
+	"version": "1.0.0",
+	"description": "Building block for type guards",
+	"iife": "dist/guard.js",
+	"main": "dist/guard.cjs.js",
+	"module": "dist/guard.es.js",
+	"types": "dist/guard.d.ts",
+	"scripts": {
+		"test": "ts-node node_modules/tape/bin/tape 'test/**/*.ts'",
+		"test:coverage": "nyc --reporter=html --require ts-node/register tape 'test/**/*.ts' | tap-spec",
+		"test:pretty": "nyc --require ts-node/register tape 'test/**/*.ts' | tap-spec",
+		"test:pretty:work": "nyc --require ts-node/register tape test/**/*.ts | tap-spec",
+		"prebuild": "tsc --declarationDir temp --declaration true --emitDeclarationOnly true",
+		"build": "rollup -c rollup.config.js",
+		"postbuild": "rm -rf temp"
+	},
+	"keywords": [
+		"emitter"
+	],
+	"author": "Rogier Spieker <rogier+npm@konfirm.eu>",
+	"license": "MIT",
+	"devDependencies": {
+		"@rollup/plugin-commonjs": "^19.0.0",
+		"@rollup/plugin-node-resolve": "^13.0.0",
+		"@rollup/plugin-typescript": "^8.2.1",
+		"@types/tape": "^4.13.0",
+		"rollup": "^2.52.2",
+		"rollup-plugin-dts": "^3.0.2",
+		"rollup-plugin-terser": "^7.0.2",
+		"tslib": "^2.3.0",
+		"nyc": "^15.1.0",
+		"tap-spec": "^5.0.0",
+		"tape": "^5.3.1",
+		"ts-node": "^10.3.0",
+		"typescript": "^4.4.4"
+	}
+}
