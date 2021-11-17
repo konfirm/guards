@@ -1,12 +1,9 @@
 name: Release
 
 on:
-  workflow_run:
-    workflows: ["Tests"]
+  push:
     tags:
       - "**"
-    types:
-      - completed
 
 jobs:
   package:
@@ -18,7 +15,7 @@ jobs:
           node-version: 14
           registry-url: https://registry.npmjs.org/
       - run: npm install
-      - run: npm run test
+      - run: npm run test:pretty
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
