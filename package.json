@@ -1,6 +1,6 @@
 {
 	"name": "@konfirm/guard",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Building blocks for type guards",
 	"iife": "dist/guard.js",
 	"main": "dist/guard.cjs.js",
