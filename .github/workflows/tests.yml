@@ -5,24 +5,45 @@ name: Tests
 
 on:
   push:
-    branches: [ '**' ]
+    branches:
+      - 'main'
+      - 'fix/*'
+      - 'feature/*'
+    paths-ignore:
+      - '**.md'
   pull_request:
-    branches: [ main ]
+    paths-ignore:
+      - '**.md'
 
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
+        os:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
+        node-version:
+          - 12.x
+          - 14.x
+          - 16.x
+        include:
+          - os: ubuntu-latest
+            platform: x32
+          - os: ubuntu-latest
+            platform: x64
+          - os: ubuntu-latest
+            arch: armv7
 
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
       with:
+        arch: ${{ matrix.arch }}
         node-version: ${{ matrix.node-version }}
     - run: npm install
     - run: npm run test:pretty
