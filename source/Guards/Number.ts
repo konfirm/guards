@@ -2,22 +2,22 @@ import { isNumber } from "./Primitive";
 import { Guard } from "./Utility";
 
 export type Integer = number;
-export function isInteger(value: any): value is Integer {
+export function isInteger<T = Integer>(value: any): value is T {
 	return Number.isSafeInteger(value);
 }
 
 export type Float = number;
-export function isFloat(value: any): value is Float {
+export function isFloat<T = Float>(value: any): value is T {
 	return !Number.isInteger(value);
 }
 
 export type Positive = number;
-export function isPositive(value: any): value is Positive {
+export function isPositive<T = Positive>(value: any): value is T {
 	return isNumber(value) && value > 0;
 }
 
 export type Negative = number;
-export function isNegative(value: any): value is Negative {
+export function isNegative<T = Negative>(value: any): value is T {
 	return isNumber(value) && value < 0;
 }
 

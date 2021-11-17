@@ -3,6 +3,6 @@ import { all, Guard } from "./Utility";
 
 export type StringWithPattern = string;
 
-export function isStringWithPattern(pattern: RegExp): Guard<StringWithPattern> {
-	return all<StringWithPattern>(isString, (value: string) => pattern.test(value));
+export function isStringWithPattern<T = StringWithPattern>(pattern: RegExp): Guard<T> {
+	return all<T>(isString, (value: string) => pattern.test(value));
 }
