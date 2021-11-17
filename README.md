@@ -1,26 +1,71 @@
+# Guards
 
-# API
+Guards - or input validation - is a concept in Typescript which allows you to easily ensure specific types. Besides being a great assistance when authoring your code in Typescript, they have the added benefit of being preserved during the transpilation to Javascript, which means your validations will become part of the 'compiled' Javascript.
+This solves an important issue with Typescript based projects at runtime, as the integrity of the data will still be guaranteed by your Guards.
 
-## Guards
+For pure Javascript developers this is good news, as these Guards easily let you validate your variables too.
 
-| export        | description                                             |
-| ------------- | ------------------------------------------------------- |
-| `isArray`     | value is an array                                       |
-| `isBigInt`    | value is a BigInt (if the runtime supports it)          |
-| `isBoolean`   | value is a boolean                                      |
-| `isFunction`  | value is a function                                     |
-| `isNULL`      | value is `NULL`                                         |
-| `isNumber`    | value is a number                                       |
-| `isObject`    | value is an object (excludes `Array` and `NULL` values) |
-| `isString`    | value is a string                                       |
-| `isSymbol`    | value is a Symbol                                       |
-| `isUndefined` | value is `undefined`                                    |
-| `isInteger`   | value is an integer (number)                            |
-| `isFloat`     | value is a float (number)                               |
-| `isPositive`  | value is a positive number (excludes 0)                 |
-| `isNegative`  | value is a negative number (exlucdes 0)                 |
+## Installation
 
-## Composition
+```
+npm install --save @konfirm/guards
+```
+
+Or use your favorite package manager to install `@konfirm/guards`
+
+## API
+
+### Guards
+The exported Guards are ready to use validators.
+
+| export        | TS type                          | description                                             |
+| ------------- | -------------------------------- | ------------------------------------------------------- |
+| `isArray`     | `Array`                          | value is an array                                       |
+| `isBigInt`    | `BigInt`                         | value is a BigInt (if the JS runtime supports it)       |
+| `isBoolean`   | `boolean`                        | value is a boolean                                      |
+| `isFunction`  | `Function`                       | value is a function                                     |
+| `isNULL`      | `null`                           | value is `NULL`                                         |
+| `isNumber`    | `number`                         | value is a number                                       |
+| `isObject`    | `{[key:string|symbol]: unknown}` | value is an object (excludes `Array` and `NULL` values) |
+| `isString`    | `string`                         | value is a string                                       |
+| `isSymbol`    | `symbol`                         | value is a Symbol                                       |
+| `isUndefined` | `undefined`                      | value is `undefined`                                    |
+| `isInteger`   | `Integer` (can be overruled)     | value is an integer (number)                            |
+| `isFloat`     | `Float` (can be overruled)       | value is a float (number)                               |
+| `isPositive`  | `Positive` (can be overruled)    | value is a positive number (excludes 0)                 |
+| `isNegative`  | `Negative` (can be overruled)    | value is a negative number (exlucdes 0)                 |
+
+#### Examples
+
+##### Typescript
+```js
+import { isPositve } from '@konfirm/guards';
+
+const value = 10;
+if (isPositve(value)) {
+	console.log(`${value} is a positve number`);
+}
+else {
+	console.log(`${value} is not a positve number`);
+}
+```
+
+##### Javascript
+```js
+//const { isInteger } = require('@konfirm/guards'); // CommonJS
+import { isInteger } from '@konfirm/guards'; // ES Modules
+
+const value = 10;
+if (isInteger(value)) {
+	console.log(`${value} is an integer`);
+}
+else {
+	console.log(`${value} is not an integer`);
+}
+```
+
+### Composition
+Compose new Guards.
 
 | export                | arguments                                                   | description                                                                                                      |
 | --------------------- | ----------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
@@ -39,4 +84,66 @@
 | `isKeyOfType`         | `string|symbol [, ...Validator]`                            | creates a Guard matching object with the specified key and its value matching all validators                     |
 | `isOptionalKeyOfType` | `string|symbol [, ...Validator]`                            | creates a Guard matching object without the specified key or its value matching all validators                   |
 | `isStructure`         | `{[key: string|symbol]: Validator} [, Array<string|symbol>` | creates a Guard validating the structure of an object                                                            |
-| `isInstanceOf`        | `Class`                                                     | creates a Guard matching the provided class                                                                      |
+| `isInstanceOf`        | `Constructor`                                               | creates a Guard validating the prototype inheritance of an object                                                |
+
+#### Examples
+
+#### Typescript
+```ts
+import { isArrayOfType, isArrayOfSize, isString, isNumber, all, any } from '@konfirm/guards';
+
+type Mixed = string | number;
+type MixedList = [Mixed, Mixed?];
+const isArrayWithSizeBetweenOneAndTwoOfStringsOrNumbers = all<MixedList>(isArrayOfType<Mixed>(any(isString, isNumber)), isArrayOfSize(1, 2));
+
+const nope = [0, false];
+const sure = [0, 'hello'];
+
+if (isArrayWithSizeBetweenOneAndTwoOfStringsOrNumbers(nope)) {
+	console.log(`${nope} is an Array containing one to two string or number types`);
+}
+else {
+	console.log(`${nope} is not an Array containing one to two string or number types`);
+}
+
+if (isArrayWithSizeBetweenOneAndTwoOfStringsOrNumbers(sure)) {
+	console.log(`${sure} is an Array containing one to two string or number types`);
+}
+else {
+	console.log(`${sure} is not an Array containing one to two string or number types`);
+}
+```
+
+#### Javascript
+```js
+// const { isStructure, isInteger, isGreaterOfEqual, all } = require('@konfirm/guards'); // CommonJS
+import { isStructure, isInteger, isGreaterOfEqual, all } from '@konfirm/guards'; // ES Modules
+
+const isAtLeast21 = isStructure({
+	age: all(isInteger, isGreaterOrEqual(21)),
+});
+const jane = { name: 'Jane Doe', age: 42 };
+const jimmy = { name: 'Jimmy Doe', age: 17 };
+const ageless = { name: 'No Age' };
+
+if (isAtLeast21(jane)) {
+	console.log(`${jane} is at least 21`);
+}
+else {
+	console.log(`${jane} is not at least 21`);
+}
+
+if (isAtLeast21(jimmy)) {
+	console.log(`${jimmy} is at least 21`);
+}
+else {
+	console.log(`${jimmy} is not at least 21`);
+}
+
+if (isAtLeast21(ageless)) {
+	console.log(`${ageless} is at least 21`);
+}
+else {
+	console.log(`${ageless} is not at least 21`);
+}
+```
