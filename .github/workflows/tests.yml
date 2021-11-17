@@ -37,11 +37,5 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Install
 	  run : npm install
-    - name: Test (windows)
-	  run : npm run test:pretty:work
-	  if  : runner.os == 'Windows'
-    - name: Test (linux/macos)
 	  run : npm run test:pretty
-	  if  : runner.os != 'Windows'

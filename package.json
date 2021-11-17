@@ -14,10 +14,15 @@
 		"url": "https://github.com/konfirm/guards/issues"
 	},
 	"scripts": {
-		"test": "ts-node node_modules/tape/bin/tape 'test/**/*.ts'",
-		"test:coverage": "nyc --reporter=html --require ts-node/register tape 'test/**/*.ts' | tap-spec",
-		"test:pretty": "nyc --require ts-node/register tape 'test/**/*.ts' | tap-spec",
-		"test:pretty:work": "nyc --require ts-node/register tape test/**/*.ts | tap-spec",
+		"test": "run-script-os",
+		"test:nix": "ts-node node_modules/tape/bin/tape 'test/**/*.ts'",
+		"test:win32": "ts-node node_modules/tape/bin/tape test/**/*.ts",
+		"test:coverage": "run-script-os",
+		"test:coverage:nix": "nyc --reporter=html --require ts-node/register tape 'test/**/*.ts' | tap-spec",
+		"test:coverage:win32": "nyc --reporter=html --require ts-node/register tape test/**/*.ts | tap-spec",
+		"test:pretty": "run-script-os",
+		"test:pretty:nix": "nyc --require ts-node/register tape 'test/**/*.ts' | tap-spec",
+		"test:pretty:win32": "nyc --require ts-node/register tape test/**/*.ts | tap-spec",
 		"prebuild": "tsc --declarationDir temp --declaration true --emitDeclarationOnly true",
 		"build": "rollup -c rollup.config.js",
 		"postbuild": "rm -rf temp",
@@ -34,14 +39,15 @@
 		"@rollup/plugin-node-resolve": "^13.0.0",
 		"@rollup/plugin-typescript": "^8.2.1",
 		"@types/tape": "^4.13.0",
+		"nyc": "^15.1.0",
 		"rollup": "^2.52.2",
 		"rollup-plugin-dts": "^3.0.2",
 		"rollup-plugin-terser": "^7.0.2",
-		"tslib": "^2.3.0",
-		"nyc": "^15.1.0",
+		"run-script-os": "^1.1.6",
 		"tap-spec": "^5.0.0",
 		"tape": "^5.3.1",
 		"ts-node": "^10.3.0",
+		"tslib": "^2.3.0",
 		"typescript": "^4.4.4"
 	}
 }
