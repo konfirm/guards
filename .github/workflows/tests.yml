@@ -33,19 +33,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-
     - name: Use Node ${{ matrix.node-version }}
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-
     - name: Install
-	  run: npm install
-
+	  run : npm install
     - name: Test (windows)
-	  if: runner.os == 'Windows'
-	  run: npm run test:pretty:work
-
+	  run : npm run test:pretty:work
+	  if  : runner.os == 'Windows'
     - name: Test (linux/macos)
-	  if: runner.os != 'Windows'
-	  run: npm run test:pretty
+	  run : npm run test:pretty
+	  if  : runner.os != 'Windows'
