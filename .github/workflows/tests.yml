@@ -6,18 +6,17 @@ name: Tests
 on:
   push:
     branches:
-      - 'main'
-      - 'fix/*'
-      - 'feature/*'
+      - "main"
+      - "fix/*"
+      - "feature/*"
     paths-ignore:
-      - '**.md'
+      - "**.md"
   pull_request:
     paths-ignore:
-      - '**.md'
+      - "**.md"
 
 jobs:
   build:
-
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -32,10 +31,10 @@ jobs:
           - 16.x
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-	- run: npm install
-	- run: npm run test:pretty
+      - uses: actions/checkout@v2
+      - name: Use Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - run: npm run test:pretty
