@@ -30,20 +30,22 @@ jobs:
           - 12.x
           - 14.x
           - 16.x
-        include:
-          - os: ubuntu-latest
-            platform: x32
-          - os: ubuntu-latest
-            platform: x64
-          - os: ubuntu-latest
-            arch: armv7
 
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
+
+    - name: Use Node ${{ matrix.node-version }}
       uses: actions/setup-node@v2
       with:
-        arch: ${{ matrix.arch }}
         node-version: ${{ matrix.node-version }}
-    - run: npm install
-    - run: npm run test:pretty
+
+    - name: Install
+	  run: npm install
+
+    - name: Test (windows)
+	  if: runner.os == 'Windows'
+	  run: npm run test:pretty:work
+
+    - name: Test (linux/macos)
+	  if: runner.os != 'Windows'
+	  run: npm run test:pretty
