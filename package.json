@@ -1,11 +1,18 @@
 {
 	"name": "@konfirm/guard",
 	"version": "1.0.0",
-	"description": "Building block for type guards",
+	"description": "Building blocks for type guards",
 	"iife": "dist/guard.js",
 	"main": "dist/guard.cjs.js",
 	"module": "dist/guard.es.js",
 	"types": "dist/guard.d.ts",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/konfirm/guards.git"
+	},
+	"bugs": {
+		"url": "https://github.com/konfirm/guards/issues"
+	},
 	"scripts": {
 		"test": "ts-node node_modules/tape/bin/tape 'test/**/*.ts'",
 		"test:coverage": "nyc --reporter=html --require ts-node/register tape 'test/**/*.ts' | tap-spec",
@@ -16,7 +23,8 @@
 		"postbuild": "rm -rf temp"
 	},
 	"keywords": [
-		"emitter"
+		"type guards",
+		"guards"
 	],
 	"author": "Rogier Spieker <rogier+npm@konfirm.eu>",
 	"license": "MIT",
