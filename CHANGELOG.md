@@ -13,7 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 
-## [1.0.0] -
+## [1.0.4] - 2021-11-17
+
+A couple of iterations figuring out the correct course of Github Actions
+
+## [1.0.0] - 2021-11-17
 
 _Initial release_
 

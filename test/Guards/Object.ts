@@ -110,8 +110,8 @@ test('Object - isInstanceOf', (t) => {
 
 	t.ok(isDate(new Date()), 'new Date() is a Date');
 	t.notOk(isDate(/^$/), '/^$/ is not a Date');
-	t.notOk(isRegex(new Date()), 'new Date() is a RegExp');
-	t.ok(isRegex(/^$/), '/^$/ is not a RegExp');
+	t.notOk(isRegex(new Date()), 'new Date() is not a RegExp');
+	t.ok(isRegex(/^$/), '/^$/ is a RegExp');
 
 	t.end();
 });

@@ -1,4 +1,4 @@
-# Guards
+# Guard
 
 Guards - or input validation - is a concept in Typescript which allows you to easily ensure specific types. Besides being a great assistance when authoring your code in Typescript, they have the added benefit of being preserved during the transpilation to Javascript, which means your validations will become part of the 'compiled' Javascript.
 This solves an important issue with Typescript based projects at runtime, as the integrity of the data will still be guaranteed by your Guards.
@@ -8,10 +8,10 @@ For pure Javascript developers this is good news, as these Guards easily let you
 ## Installation
 
 ```
-npm install --save @konfirm/guards
+npm install --save @konfirm/guard
 ```
 
-Or use your favorite package manager to install `@konfirm/guards`
+Or use your favorite package manager to install `@konfirm/guard`
 
 ## API
 
@@ -39,7 +39,7 @@ The exported Guards are ready to use validators.
 
 ##### Typescript
 ```js
-import { isPositve } from '@konfirm/guards';
+import { isPositve } from '@konfirm/guard';
 
 const value = 10;
 if (isPositve(value)) {
@@ -52,8 +52,8 @@ else {
 
 ##### Javascript
 ```js
-//const { isInteger } = require('@konfirm/guards'); // CommonJS
-import { isInteger } from '@konfirm/guards'; // ES Modules
+//const { isInteger } = require('@konfirm/guard'); // CommonJS
+import { isInteger } from '@konfirm/guard'; // ES Modules
 
 const value = 10;
 if (isInteger(value)) {
@@ -90,7 +90,7 @@ Compose new Guards.
 
 #### Typescript
 ```ts
-import { isArrayOfType, isArrayOfSize, isString, isNumber, all, any } from '@konfirm/guards';
+import { isArrayOfType, isArrayOfSize, isString, isNumber, all, any } from '@konfirm/guard';
 
 type Mixed = string | number;
 type MixedList = [Mixed, Mixed?];
@@ -116,8 +116,8 @@ else {
 
 #### Javascript
 ```js
-// const { isStructure, isInteger, isGreaterOfEqual, all } = require('@konfirm/guards'); // CommonJS
-import { isStructure, isInteger, isGreaterOfEqual, all } from '@konfirm/guards'; // ES Modules
+// const { isStructure, isInteger, isGreaterOfEqual, all } = require('@konfirm/guard'); // CommonJS
+import { isStructure, isInteger, isGreaterOfEqual, all } from '@konfirm/guard'; // ES Modules
 
 const isAtLeast21 = isStructure({
 	age: all(isInteger, isGreaterOrEqual(21)),
