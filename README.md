@@ -1,3 +1,6 @@
+![tests](https://github.com/konfirm/guards/actions/workflows/tests.yml/badge.svg)
+![release](https://github.com/konfirm/guards/actions/workflows/release.yml/badge.svg)
+
 # Guard
 
 Guards - or input validation - is a concept in Typescript which allows you to easily ensure specific types. Besides being a great assistance when authoring your code in Typescript, they have the added benefit of being preserved during the transpilation to Javascript, which means your validations will become part of the 'compiled' Javascript.
