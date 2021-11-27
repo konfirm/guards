@@ -86,6 +86,7 @@ Compose new Guards.
 | `isKey`               | `string|symbol`                                             | creates a Guard matching objects with the specified key                                                          |
 | `isKeyOfType`         | `string|symbol [, ...Validator]`                            | creates a Guard matching object with the specified key and its value matching all validators                     |
 | `isOptionalKeyOfType` | `string|symbol [, ...Validator]`                            | creates a Guard matching object without the specified key or its value matching all validators                   |
+| `isStrictStructure`   | `{[key: string|symbol]: Validator} [, Array<string|symbol>` | creates a Guard validating the structure of an object, allowing no excess properties                             |
 | `isStructure`         | `{[key: string|symbol]: Validator} [, Array<string|symbol>` | creates a Guard validating the structure of an object                                                            |
 | `isInstanceOf`        | `Constructor`                                               | creates a Guard validating the prototype inheritance of an object                                                |
 
