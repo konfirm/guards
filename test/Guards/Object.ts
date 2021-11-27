@@ -80,7 +80,7 @@ test('Object - isStructure {foo:<string>,bar:<number>,baz:<number|boolean>}', (t
 	t.notOk(struct({}), '{} does not match structure');
 	t.notOk(struct({ foo: 'foo' }), `{foo: 'foo'} does not match structure`);
 	t.notOk(struct({ foo: 'foo', bar: 123, baz: 'baz' }), `{foo: 'foo', bar: 123, baz: 'baz'} does not match structure`);
-	t.notOk(struct({ foo: 'foo', bar: 123 }), `{foo: 'foo', bar: 123} matches structure`);
+	t.notOk(struct({ foo: 'foo', bar: 123 }), `{foo: 'foo', bar: 123} does not match structure`);
 
 	t.ok(struct({ foo: 'foo', bar: 123, baz: 345 }), `{foo: 'foo', bar: 123, baz: 345} matches structure`);
 	t.ok(struct({ foo: 'foo', bar: 123, baz: false }), `{foo: 'foo', bar: 123, baz: false} matches structure`);
