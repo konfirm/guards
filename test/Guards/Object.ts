@@ -4,7 +4,7 @@ import { any } from '../../source/Guards/Utility';
 import * as Objects from '../../source/Guards/Object';
 
 test('Object - exports', (t) => {
-	const expect = ['isKey', 'isKeyOfType', 'isOptionalKeyOfType', 'isStructure', 'isInstanceOf'];
+	const expect = ['isKey', 'isKeyOfType', 'isOptionalKeyOfType', 'isStructure', 'isStrictStructure', 'isInstanceOf'];
 
 	t.deepEqual(Object.keys(Objects), expect, `exports ${expect.join(', ')}`);
 	expect.forEach((key) => {
@@ -80,7 +80,7 @@ test('Object - isStructure {foo:<string>,bar:<number>,baz:<number|boolean>}', (t
 	t.notOk(struct({}), '{} does not match structure');
 	t.notOk(struct({ foo: 'foo' }), `{foo: 'foo'} does not match structure`);
 	t.notOk(struct({ foo: 'foo', bar: 123, baz: 'baz' }), `{foo: 'foo', bar: 123, baz: 'baz'} does not match structure`);
-	t.notOk(struct({ foo: 'foo', bar: 123 }), `{foo: 'foo', bar: 123} matches structure`);
+	t.notOk(struct({ foo: 'foo', bar: 123 }), `{foo: 'foo', bar: 123} does not match structure`);
 
 	t.ok(struct({ foo: 'foo', bar: 123, baz: 345 }), `{foo: 'foo', bar: 123, baz: 345} matches structure`);
 	t.ok(struct({ foo: 'foo', bar: 123, baz: false }), `{foo: 'foo', bar: 123, baz: false} matches structure`);
@@ -100,6 +100,36 @@ test('Object - isStructure {foo:<string>,bar:<number>,baz?:<number|boolean>}', (
 	t.ok(struct({ foo: 'foo', bar: 123, baz: 345 }), `{foo: 'foo', bar: 123, baz: 345} matches structure`);
 	t.ok(struct({ foo: 'foo', bar: 123, baz: false }), `{foo: 'foo', bar: 123, baz: false} matches structure`);
 	t.ok(struct({ foo: 'foo', bar: 123, baz: true, qux: 'ignored' }), `{foo: 'foo', bar: 123, baz: true} matches structure`);
+
+	t.end();
+});
+
+test('Object - isStrictStructure {foo:<string>,bar:<number>,baz:<number|boolean>}', (t) => {
+	const struct = Objects.isStrictStructure({ foo: isString, bar: isNumber, baz: any(isNumber, isBoolean) });
+
+	t.notOk(struct({}), '{} does not match structure');
+	t.notOk(struct({ foo: 'foo' }), `{foo: 'foo'} does not match structure`);
+	t.notOk(struct({ foo: 'foo', bar: 123, baz: 'baz' }), `{foo: 'foo', bar: 123, baz: 'baz'} does not match structure`);
+	t.notOk(struct({ foo: 'foo', bar: 123 }), `{foo: 'foo', bar: 123} matches structure`);
+	t.notOk(struct({ foo: 'foo', bar: 123, baz: true, qux: 'rejected' }), `{foo: 'foo', bar: 123, baz: true} does not match structure`);
+
+	t.ok(struct({ foo: 'foo', bar: 123, baz: 345 }), `{foo: 'foo', bar: 123, baz: 345} matches structure`);
+	t.ok(struct({ foo: 'foo', bar: 123, baz: false }), `{foo: 'foo', bar: 123, baz: false} matches structure`);
+
+	t.end();
+});
+
+test('Object - isStrictStructure {foo:<string>,bar:<number>,baz?:<number|boolean>}', (t) => {
+	const struct = Objects.isStrictStructure({ foo: isString, bar: isNumber, baz: any(isNumber, isBoolean) }, 'baz');
+
+	t.notOk(struct({}), '{} does not match structure');
+	t.notOk(struct({ foo: 'foo' }), `{foo: 'foo'} does not match structure`);
+	t.notOk(struct({ foo: 'foo', bar: 123, baz: 'baz' }), `{foo: 'foo', bar: 123, baz: 'baz'} does not match structure`);
+
+	t.ok(struct({ foo: 'foo', bar: 123 }), `{foo: 'foo', bar: 123} matches structure`);
+	t.ok(struct({ foo: 'foo', bar: 123, baz: 345 }), `{foo: 'foo', bar: 123, baz: 345} matches structure`);
+	t.ok(struct({ foo: 'foo', bar: 123, baz: false }), `{foo: 'foo', bar: 123, baz: false} matches structure`);
+	t.notOk(struct({ foo: 'foo', bar: 123, baz: true, qux: 'rejected' }), `{foo: 'foo', bar: 123, baz: true, qux:"rejected"} does not match structure`);
 
 	t.end();
 });
