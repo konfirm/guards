@@ -157,6 +157,15 @@ else {
 }
 ```
 
+### Assertions
+
+| export      | arguments                                                      | description            |
+| ----------- | -------------------------------------------------------------- | ---------------------- |
+| `assertion` | `string message, ...rules[Validator, ...Validator]`            | create an assert guard |
+| `assert`    | `any value, string message, ...rules[Validator, ...Validator]` | assert                 |
+
+
+
 ## License
 MIT License Copyright (c) 2021 Rogier Spieker (Konfirm)
 
