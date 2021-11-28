@@ -68,27 +68,27 @@ else {
 ```
 
 ### Composition
-Compose new Guards to serve your fine-grained needs.
+Compose new Guards.
 
-| export                | base type | arguments                                                   | description                                                                                                         |
-| --------------------- | --------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `is`                  | any       | `string`                                                    | creates a Guard using the native `typeof`                                                                           |
-| `any`                 | any       | `Validator [, ...Validator]`                                | creates a Guard matching any validator                                                                              |
-| `all`                 | any       | `Validator [, ...Validator]`                                | creates a Guard matching all validators                                                                             |
-| `not`                 | any       | `Validator [, ...Validator]`                                | creates a Guard matching none of the validators (inverse of `all`)                                                  |
-| `isStringWithPattern` | string    | `RegExp`                                                    | creates a Guard matching strings which match the pattern                                                            |
-| `isGreater`           | number    | `number`                                                    | creates a Guard matching numbers greater than `number`                                                              |
-| `isLess`              | number    | `number`                                                    | creates a Guard matching numbers less than `number`                                                                 |
-| `isGreaterOrEqual`    | number    | `number`                                                    | creates a Guard matching numbers greater than or equal to `number`                                                  |
-| `isLessOrEqual`       | number    | `number`                                                    | creates a Guard matching numbers less than or equal to `number`                                                     |
-| `isArrayOfType`       | array     | `Validator [, ...Validator]`                                | creates a Guard matching arrays whose items all match all validators                                                |
-| `isArrayOfSize`       | array     | `number [, number]`                                         | creates a Guard matching arrays whose size is at least the first number and at most the second (optional) number    |
-| `isKey`               | object    | `string|symbol`                                             | creates a Guard matching objects with the specified key                                                             |
-| `isKeyOfType`         | object    | `string|symbol [, ...Validator]`                            | creates a Guard matching object with the specified key and its value matching all validators                        |
-| `isOptionalKeyOfType` | object    | `string|symbol [, ...Validator]`                            | creates a Guard matching object without the specified key or its value matching all validators                      |
-| `isStrictStructure`   | object    | `{[key: string|symbol]: Validator} [, Array<string|symbol>` | creates a Guard validating the structure of an object (with specified optional keys), allowing no excess properties |
-| `isStructure`         | object    | `{[key: string|symbol]: Validator} [, Array<string|symbol>` | creates a Guard validating the structure of an object (with specified optional keys)                                |
-| `isInstanceOf`        | object    | `Constructor`                                               | creates a Guard validating the prototype inheritance of an object                                                   |
+| export                | arguments                                                   | description                                                                                                      |
+| --------------------- | ----------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `is`                  | `string`                                                    | creates a Guard using the native `typeof`                                                                        |
+| `any`                 | `Validator [, ...Validator]`                                | creates a Guard matching any validator                                                                           |
+| `all`                 | `Validator [, ...Validator]`                                | creates a Guard matching all validators                                                                          |
+| `not`                 | `Validator [, ...Validator]`                                | creates a Guard matching none of the validators (inverse of `all`)                                               |
+| `isStringWithPattern` | `RegExp`                                                    | creates a Guard matching strings which match the pattern                                                         |
+| `isGreater`           | `number`                                                    | creates a Guard matching numbers greater than `number`                                                           |
+| `isLess`              | `number`                                                    | creates a Guard matching numbers less than `number`                                                              |
+| `isGreaterOrEqual`    | `number`                                                    | creates a Guard matching numbers greater than or equal to `number`                                               |
+| `isLessOrEqual`       | `number`                                                    | creates a Guard matching numbers less than or equal to `number`                                                  |
+| `isArrayOfType`       | `Validator [, ...Validator]`                                | creates a Guard matching arrays whose items all match all validators                                             |
+| `isArrayOfSize`       | `number [, number]`                                         | creates a Guard matching arrays whose size is at least the first number and at most the second (optional) number |
+| `isKey`               | `string|symbol`                                             | creates a Guard matching objects with the specified key                                                          |
+| `isKeyOfType`         | `string|symbol [, ...Validator]`                            | creates a Guard matching object with the specified key and its value matching all validators                     |
+| `isOptionalKeyOfType` | `string|symbol [, ...Validator]`                            | creates a Guard matching object without the specified key or its value matching all validators                   |
+| `isStrictStructure`   | `{[key: string|symbol]: Validator} [, Array<string|symbol>` | creates a Guard validating the structure of an object, allowing no excess properties                             |
+| `isStructure`         | `{[key: string|symbol]: Validator} [, Array<string|symbol>` | creates a Guard validating the structure of an object                                                            |
+| `isInstanceOf`        | `Constructor`                                               | creates a Guard validating the prototype inheritance of an object                                                |
 
 #### Examples
 
