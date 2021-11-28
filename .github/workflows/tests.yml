@@ -12,6 +12,7 @@ on:
     paths-ignore:
       - "**.md"
   pull_request:
+    types: [opened, synchronize, closed]
     paths-ignore:
       - "**.md"
 

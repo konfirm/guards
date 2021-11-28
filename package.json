@@ -46,6 +46,7 @@
 		"run-script-os": "^1.1.6",
 		"tap-arc": "^0.1.1",
 		"tape": "^5.3.1",
+		"template-literal-each": "^2.0.0",
 		"ts-node": "^10.3.0",
 		"tslib": "^2.3.0",
 		"typescript": "^4.4.4"

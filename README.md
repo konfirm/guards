@@ -19,7 +19,7 @@ Or use your favorite package manager to install `@konfirm/guard`
 ## API
 
 ### Guards
-The exported Guards are ready to use validators.
+The exported Guards are ready to use validators
 
 | export        | TS type                          | description                                             |
 | ------------- | -------------------------------- | ------------------------------------------------------- |
@@ -93,12 +93,17 @@ Compose new Guards.
 #### Examples
 
 #### Typescript
+All guard composition functions require the return type as generic argument, if the guard returns true (validations match) this type is then guaranteed according as far as typescript and the transpiled javascript are concerned.
+
 ```ts
 import { isArrayOfType, isArrayOfSize, isString, isNumber, all, any } from '@konfirm/guard';
 
 type Mixed = string | number;
 type MixedList = [Mixed, Mixed?];
-const isArrayWithSizeBetweenOneAndTwoOfStringsOrNumbers = all<MixedList>(isArrayOfType<Mixed>(any(isString, isNumber)), isArrayOfSize(1, 2));
+const isArrayWithSizeBetweenOneAndTwoOfStringsOrNumbers = all<MixedList>(
+	isArrayOfType<Mixed>(any(isString, isNumber)),
+	isArrayOfSize(1, 2)
+);
 
 const nope = [0, false];
 const sure = [0, 'hello'];
@@ -151,6 +156,15 @@ else {
 	console.log(`${ageless} is not at least 21`);
 }
 ```
+
+### Assertions
+
+| export      | arguments                                                      | description            |
+| ----------- | -------------------------------------------------------------- | ---------------------- |
+| `assertion` | `string message, ...rules[Validator, ...Validator]`            | create an assert guard |
+| `assert`    | `any value, string message, ...rules[Validator, ...Validator]` | assert                 |
+
+
 
 ## License
 MIT License Copyright (c) 2021 Rogier Spieker (Konfirm)
