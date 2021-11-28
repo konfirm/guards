@@ -16,17 +16,6 @@ test('Guards/Assertion - exports', (t) => {
 
 const { assertion, assert } = Assertion;
 
-function inspect(structure: { [key: string]: unknown }): (error: Error) => boolean {
-	const keys = Object.keys(structure);
-
-	return (error: Error): boolean => {
-		return error instanceof AssertionError && keys.every((key) => {
-			console.log({ key, expect: structure[key], actual: error[key] });
-			return true;
-		});
-	}
-}
-
 function verify(structure: { [key: string]: unknown }): (error: Error) => boolean {
 	const keys = Object.keys(structure);
 
@@ -123,15 +112,15 @@ test('Guards/Assertion - assert', (t) => {
 
 	const number = {
 		message: 'is number',
-		reason: 'foo is number',
+		reason: '"foo" is number',
 		reasons: [
-			'foo is number',
+			'"foo" is number',
 		],
 		cause: [
 			{ value: 'foo', message: 'is number' },
 		],
 	};
-	t.throws(() => assert('foo', 'is number', isNumber), inspect(number), '"foo" does not assert as number');
+	t.throws(() => assert('foo', 'is number', isNumber), verify(number), '"foo" does not assert as number');
 
 	t.end();
 });
