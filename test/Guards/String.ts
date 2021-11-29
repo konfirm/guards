@@ -1,7 +1,7 @@
 import test from 'tape';
 import * as Strings from '../../source/Guards/String';
 
-test('String - exports', (t) => {
+test('Guards/String - exports', (t) => {
 	const expected = ['isStringWithPattern'];
 
 	t.deepEqual(Object.keys(Strings), expected, `exports ${expected.join(', ')}`);
@@ -12,7 +12,7 @@ test('String - exports', (t) => {
 	t.end();
 });
 
-test('String - isStringWithPattern', (t) => {
+test('Guards/String - isStringWithPattern', (t) => {
 	const isHello = Strings.isStringWithPattern(/^Hello/);
 
 	t.ok(isHello('Hello World!'), '"Hello World!" matches isStringWithPattern(/^Hello/)');

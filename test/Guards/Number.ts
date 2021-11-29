@@ -1,7 +1,7 @@
 import test from 'tape';
 import * as Numbers from '../../source/Guards/Number';
 
-test('Number - exports', (t) => {
+test('Guards/Number - exports', (t) => {
 	const expect = [
 		'isInteger',
 		'isFloat',
@@ -60,7 +60,7 @@ test('Types/Number - isNegative', (t) => {
 	t.end();
 });
 
-test('Number - isGreater', (t) => {
+test('Guards/Number - isGreater', (t) => {
 	const isGreaterThanTwo = Numbers.isGreater(2);
 	const isGreaterThanMinusTwo = Numbers.isGreater(-2);
 
@@ -80,7 +80,7 @@ test('Number - isGreater', (t) => {
 	t.end();
 });
 
-test('Number - isLess', (t) => {
+test('Guards/Number - isLess', (t) => {
 	const isLessThanTwo = Numbers.isLess(2);
 	const isLessThanMinusTwo = Numbers.isLess(-2);
 
@@ -100,7 +100,7 @@ test('Number - isLess', (t) => {
 	t.end();
 });
 
-test('Number - isGreaterOrEqual', (t) => {
+test('Guards/Number - isGreaterOrEqual', (t) => {
 	const isGreaterOrEqualTwo = Numbers.isGreaterOrEqual(2);
 	const isGreaterOrEqualMinusTwo = Numbers.isGreaterOrEqual(-2);
 
@@ -120,7 +120,7 @@ test('Number - isGreaterOrEqual', (t) => {
 	t.end();
 });
 
-test('Number - isLessOrEqual', (t) => {
+test('Guards/Number - isLessOrEqual', (t) => {
 	const isLessOrEqualTwo = Numbers.isLessOrEqual(2);
 	const isLessOrEqualMinusTwo = Numbers.isLessOrEqual(-2);
 

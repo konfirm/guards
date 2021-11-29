@@ -15,7 +15,7 @@ const types = {
 };
 const keys = Object.keys(types);
 
-test('Primitive - exports', (t) => {
+test('Guards/Primitive - exports', (t) => {
 	t.deepEqual(Object.keys(Primitive), keys, `exports ${keys.join(', ')}`);
 	keys.forEach((key) => {
 		t.equal(typeof Primitive[key], 'function', `${key} is a function`);
@@ -25,7 +25,7 @@ test('Primitive - exports', (t) => {
 });
 
 keys.forEach((type) => {
-	test(`Primitive - ${type}`, (t) => {
+	test(`Guards/Primitive - ${type}`, (t) => {
 		const name = type.slice(2);
 		const rest = keys.filter((key) => key !== type);
 

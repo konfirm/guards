@@ -16,7 +16,7 @@ const keys = Object.keys(types);
 const isDateInYear2000 = (date: Date) => date.getFullYear() === 2000;
 const isDateInNovember = (date: Date) => date.getMonth() === 10;
 
-test('Utility - exports', (t) => {
+test('Guards/Utility - exports', (t) => {
 	const expect = ['is', 'any', 'all', 'not'];
 
 	t.deepEqual(Object.keys(Utilities), expect, `exports ${expect.join(', ')}`);
@@ -29,7 +29,7 @@ test('Utility - exports', (t) => {
 
 keys.forEach((type) => {
 	const validator = Utilities.is(type as any);
-	test(`Utility/is - ${type}`, (t) => {
+	test(`Guards/Utility/is - ${type}`, (t) => {
 		const rest = keys.filter((key) => key !== type);
 
 		t.ok(types[type].every(validator), `${type} values match`);
@@ -40,7 +40,7 @@ keys.forEach((type) => {
 });
 
 
-test('Utility/any', (t) => {
+test('Guards/Utility/any', (t) => {
 	const validate = Utilities.any(isDateInYear2000, isDateInNovember);
 
 	t.ok(validate(new Date('2000-11-11')), '2000-11-11 matches any(isDateInYear2000, isDateInNovember)');
@@ -51,7 +51,7 @@ test('Utility/any', (t) => {
 	t.end();
 });
 
-test('Utility/all', (t) => {
+test('Guards/Utility/all', (t) => {
 	const validate = Utilities.all(isDateInYear2000, isDateInNovember);
 
 	t.ok(validate(new Date('2000-11-11')), '2000-11-11 matches all(isDateInYear2000, isDateInNovember)');
@@ -62,7 +62,7 @@ test('Utility/all', (t) => {
 	t.end();
 });
 
-test('Utility/not', (t) => {
+test('Guards/Utility/not', (t) => {
 	const validate = Utilities.not(isDateInYear2000, isDateInNovember);
 
 	t.notOk(validate(new Date('2000-11-11')), '2000-11-11 does not match not(isDateInYear2000, isDateInNovember)');

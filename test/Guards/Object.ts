@@ -3,7 +3,7 @@ import { isBoolean, isNumber, isString } from '../../source/Guards/Primitive';
 import { any } from '../../source/Guards/Utility';
 import * as Objects from '../../source/Guards/Object';
 
-test('Object - exports', (t) => {
+test('Guards/Object - exports', (t) => {
 	const expect = ['isKey', 'isKeyOfType', 'isOptionalKeyOfType', 'isStructure', 'isStrictStructure', 'isInstanceOf'];
 
 	t.deepEqual(Object.keys(Objects), expect, `exports ${expect.join(', ')}`);
@@ -14,7 +14,7 @@ test('Object - exports', (t) => {
 	t.end();
 });
 
-test('Object - isKey', (t) => {
+test('Guards/Object - isKey', (t) => {
 	const foo = Objects.isKey('foo');
 
 	t.notOk(foo("foo"), '"foo" does not contain key "foo"');
@@ -34,7 +34,7 @@ test('Object - isKey', (t) => {
 	t.end();
 });
 
-test('Object - isKeyOfType', (t) => {
+test('Guards/Object - isKeyOfType', (t) => {
 	const foo = Objects.isKeyOfType('foo', any(isString, isBoolean));
 
 	t.notOk(foo("foo"), '"foo" does not contain key "foo" with type isString or isBoolean');
@@ -54,7 +54,7 @@ test('Object - isKeyOfType', (t) => {
 	t.end();
 });
 
-test('Object - isOptionalKeyOfType', (t) => {
+test('Guards/Object - isOptionalKeyOfType', (t) => {
 	const foo = Objects.isOptionalKeyOfType('foo', any(isString, isBoolean));
 
 	t.notOk(foo("foo"), '"foo" does not contain key "foo" with type isString or isBoolean');
@@ -74,7 +74,7 @@ test('Object - isOptionalKeyOfType', (t) => {
 	t.end();
 });
 
-test('Object - isStructure {foo:<string>,bar:<number>,baz:<number|boolean>}', (t) => {
+test('Guards/Object - isStructure {foo:<string>,bar:<number>,baz:<number|boolean>}', (t) => {
 	const struct = Objects.isStructure({ foo: isString, bar: isNumber, baz: any(isNumber, isBoolean) });
 
 	t.notOk(struct({}), '{} does not match structure');
@@ -89,7 +89,7 @@ test('Object - isStructure {foo:<string>,bar:<number>,baz:<number|boolean>}', (t
 	t.end();
 });
 
-test('Object - isStructure {foo:<string>,bar:<number>,baz?:<number|boolean>}', (t) => {
+test('Guards/Object - isStructure {foo:<string>,bar:<number>,baz?:<number|boolean>}', (t) => {
 	const struct = Objects.isStructure({ foo: isString, bar: isNumber, baz: any(isNumber, isBoolean) }, ['baz']);
 
 	t.notOk(struct({}), '{} does not match structure');
@@ -104,7 +104,7 @@ test('Object - isStructure {foo:<string>,bar:<number>,baz?:<number|boolean>}', (
 	t.end();
 });
 
-test('Object - isStrictStructure {foo:<string>,bar:<number>,baz:<number|boolean>}', (t) => {
+test('Guards/Object - isStrictStructure {foo:<string>,bar:<number>,baz:<number|boolean>}', (t) => {
 	const struct = Objects.isStrictStructure({ foo: isString, bar: isNumber, baz: any(isNumber, isBoolean) });
 
 	t.notOk(struct({}), '{} does not match structure');
@@ -119,7 +119,7 @@ test('Object - isStrictStructure {foo:<string>,bar:<number>,baz:<number|boolean>
 	t.end();
 });
 
-test('Object - isStrictStructure {foo:<string>,bar:<number>,baz?:<number|boolean>}', (t) => {
+test('Guards/Object - isStrictStructure {foo:<string>,bar:<number>,baz?:<number|boolean>}', (t) => {
 	const struct = Objects.isStrictStructure({ foo: isString, bar: isNumber, baz: any(isNumber, isBoolean) }, 'baz');
 
 	t.notOk(struct({}), '{} does not match structure');
@@ -134,7 +134,7 @@ test('Object - isStrictStructure {foo:<string>,bar:<number>,baz?:<number|boolean
 	t.end();
 });
 
-test('Object - isInstanceOf', (t) => {
+test('Guards/Object - isInstanceOf', (t) => {
 	const isDate = Objects.isInstanceOf(Date);
 	const isRegex = Objects.isInstanceOf(RegExp);
 

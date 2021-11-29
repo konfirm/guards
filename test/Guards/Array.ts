@@ -3,7 +3,7 @@ import { isBoolean, isNumber } from '../../source/Guards/Primitive';
 import { any, not } from '../../source/Guards/Utility';
 import * as Arrays from '../../source/Guards/Array';
 
-test('Array - exports', (t) => {
+test('Guards/Array - exports', (t) => {
 	const expect = ['isArrayOfType', 'isArrayOfSize'];
 
 	t.deepEqual(Object.keys(Arrays), expect, `exports ${expect.join(', ')}`);
@@ -14,7 +14,7 @@ test('Array - exports', (t) => {
 	t.end();
 });
 
-test('Array - isArrayOfType', (t) => {
+test('Guards/Array - isArrayOfType', (t) => {
 	const isBooleanArray = Arrays.isArrayOfType(isBoolean);
 	const isNumberArray = Arrays.isArrayOfType(isNumber);
 	const isBooleanOrNumberArray = Arrays.isArrayOfType(any(isBoolean, isNumber));
@@ -42,7 +42,7 @@ test('Array - isArrayOfType', (t) => {
 	t.end();
 });
 
-test('Array - isArrayOfSize', (t) => {
+test('Guards/Array - isArrayOfSize', (t) => {
 	const isArrayOfLeastOne = Arrays.isArrayOfSize(1);
 	const isArrayOfSizeOne = Arrays.isArrayOfSize(1, 1);
 	const isArrayOfCapOne = Arrays.isArrayOfSize(0, 1);
