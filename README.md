@@ -18,6 +18,52 @@ Or use your favorite package manager to install `@konfirm/guard`
 
 ## API
 
+### Exports
+
+| name                                        | type       |
+| ------------------------------------------- | ---------- |
+| [all](#all)                                 | function   |
+| [any](#any)                                 | function   |
+| [assert](#assert)                           | function   |
+| [assertion](#assertion)                     | function   |
+| [is](#is)                                   | function   |
+| [isArray](#isarray)                         | function   |
+| [isArrayOfSize](#isarrayofsize)             | function   |
+| [isArrayOfType](#isarrayoftype)             | function   |
+| [isBigInt](#isbigint)                       | function   |
+| [isBoolean](#isboolean)                     | function   |
+| [isFloat](#isfloat)                         | function   |
+| [isFunction](#isfunction)                   | function   |
+| [isGreater](#isgreater)                     | function   |
+| [isGreaterOrEqual](#isgreaterorequal)       | function   |
+| [isInstanceOf](#isinstanceof)               | function   |
+| [isInteger](#isinteger)                     | function   |
+| [isKey](#iskey)                             | function   |
+| [isKeyOfType](#iskeyoftype)                 | function   |
+| [isLess](#isless)                           | function   |
+| [isLessOrEqual](#islessorequal)             | function   |
+| [isNULL](#isnull)                           | function   |
+| [isNegative](#isnegative)                   | function   |
+| [isNumber](#isnumber)                       | function   |
+| [isObject](#isobject)                       | function   |
+| [isOptionalKeyOfType](#isoptionalkeyoftype) | function   |
+| [isPositive](#ispositive)                   | function   |
+| [isStrictStructure](#isstrictstructure)     | function   |
+| [isString](#isstring)                       | function   |
+| [isStringWithPattern](#isstringwithpattern) | function   |
+| [isStructure](#isstructure)                 | function   |
+| [isSymbol](#issymbol)                       | function   |
+| [isUndefined](#isundefined)                 | function   |
+| [not](#not)                                 | function   |
+| [Float](#float)                             | Type alias |
+| [Guard](#guard)                             | Type alias |
+| [Integer](#integer)                         | Type alias |
+| [Negative](#negative)                       | Type alias |
+| [Positive](#positive)                       | Type alias |
+| [StringWithPattern](#stringwithpattern)     | Type alias |
+| [Validator](#validator)                     | Type alias |
+
+
 ### all
 
 ▸ **all**<`T`\>(...`checks`): [`Guard`](#guard)<`T`\>
