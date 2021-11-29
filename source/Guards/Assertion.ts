@@ -1,6 +1,9 @@
 import { AssertionError } from '../Error/AssertionError';
 import { all, Guard, Validator } from './Utility';
 
+/**
+ * Create an assertion guard, throwing an AssertionError with the provided message if any validator failes
+ */
 export function assertion<T>(message: string, ...rules: [Validator, ...Array<Validator>]): Guard<T> {
 	const valid = all(...rules);
 	// create an extend of AssertionError which is a unique value for each assertion
@@ -30,6 +33,9 @@ export function assertion<T>(message: string, ...rules: [Validator, ...Array<Val
 	};
 }
 
+/**
+ * Guard asserting the given value to match the conditions or throw an AssertionError otherwise
+ */
 export function assert<T>(value: any, message: string, ...rules: [Validator, ...Array<Validator>]): value is T {
 	const validate = assertion(message, ...rules);
 
