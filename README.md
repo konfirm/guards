@@ -18,151 +18,776 @@ Or use your favorite package manager to install `@konfirm/guard`
 
 ## API
 
-### Guards
-The exported Guards are ready to use validators
+### all
 
-| export        | TS type                          | description                                             |
-| ------------- | -------------------------------- | ------------------------------------------------------- |
-| `isArray`     | `Array`                          | value is an array                                       |
-| `isBigInt`    | `BigInt`                         | value is a BigInt (if the JS runtime supports it)       |
-| `isBoolean`   | `boolean`                        | value is a boolean                                      |
-| `isFunction`  | `Function`                       | value is a function                                     |
-| `isNULL`      | `null`                           | value is `NULL`                                         |
-| `isNumber`    | `number`                         | value is a number                                       |
-| `isObject`    | `{[key:string|symbol]: unknown}` | value is an object (excludes `Array` and `NULL` values) |
-| `isString`    | `string`                         | value is a string                                       |
-| `isSymbol`    | `symbol`                         | value is a Symbol                                       |
-| `isUndefined` | `undefined`                      | value is `undefined`                                    |
-| `isInteger`   | `Integer` (can be overruled)     | value is an integer (number)                            |
-| `isFloat`     | `Float` (can be overruled)       | value is a float (number)                               |
-| `isPositive`  | `Positive` (can be overruled)    | value is a positive number (excludes 0)                 |
-| `isNegative`  | `Negative` (can be overruled)    | value is a negative number (exlucdes 0)                 |
+▸ **all**<`T`\>(...`checks`): [`Guard`](#guard)<`T`\>
 
-#### Examples
+Create a guard verifying the given value matches all of the validators
 
-##### Typescript
-```js
-import { isPositve } from '@konfirm/guard';
+#### Type parameters
 
-const value = 10;
-if (isPositve(value)) {
-	console.log(`${value} is a positve number`);
-}
-else {
-	console.log(`${value} is not a positve number`);
-}
-```
+| Name |
+| :--- |
+| `T`  |
 
-##### Javascript
-```js
-//const { isInteger } = require('@konfirm/guard'); // CommonJS
-import { isInteger } from '@konfirm/guard'; // ES Modules
+#### Parameters
 
-const value = 10;
-if (isInteger(value)) {
-	console.log(`${value} is an integer`);
-}
-else {
-	console.log(`${value} is not an integer`);
-}
-```
+| Name        | Type                                                        |
+| :---------- | :---------------------------------------------------------- |
+| `...checks` | [[`Validator`](#validator), ...<[`Validator`](#validator)>] |
 
-### Composition
-Compose new Guards.
+#### Returns
 
-| export                | arguments                                                   | description                                                                                                      |
-| --------------------- | ----------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `is`                  | `string`                                                    | creates a Guard using the native `typeof`                                                                        |
-| `any`                 | `Validator [, ...Validator]`                                | creates a Guard matching any validator                                                                           |
-| `all`                 | `Validator [, ...Validator]`                                | creates a Guard matching all validators                                                                          |
-| `not`                 | `Validator [, ...Validator]`                                | creates a Guard matching none of the validators (inverse of `all`)                                               |
-| `isStringWithPattern` | `RegExp`                                                    | creates a Guard matching strings which match the pattern                                                         |
-| `isGreater`           | `number`                                                    | creates a Guard matching numbers greater than `number`                                                           |
-| `isLess`              | `number`                                                    | creates a Guard matching numbers less than `number`                                                              |
-| `isGreaterOrEqual`    | `number`                                                    | creates a Guard matching numbers greater than or equal to `number`                                               |
-| `isLessOrEqual`       | `number`                                                    | creates a Guard matching numbers less than or equal to `number`                                                  |
-| `isArrayOfType`       | `Validator [, ...Validator]`                                | creates a Guard matching arrays whose items all match all validators                                             |
-| `isArrayOfSize`       | `number [, number]`                                         | creates a Guard matching arrays whose size is at least the first number and at most the second (optional) number |
-| `isKey`               | `string|symbol`                                             | creates a Guard matching objects with the specified key                                                          |
-| `isKeyOfType`         | `string|symbol [, ...Validator]`                            | creates a Guard matching object with the specified key and its value matching all validators                     |
-| `isOptionalKeyOfType` | `string|symbol [, ...Validator]`                            | creates a Guard matching object without the specified key or its value matching all validators                   |
-| `isStrictStructure`   | `{[key: string|symbol]: Validator} [, Array<string|symbol>` | creates a Guard validating the structure of an object, allowing no excess properties                             |
-| `isStructure`         | `{[key: string|symbol]: Validator} [, Array<string|symbol>` | creates a Guard validating the structure of an object                                                            |
-| `isInstanceOf`        | `Constructor`                                               | creates a Guard validating the prototype inheritance of an object                                                |
+[`Guard`](#guard)<`T`\>
 
-#### Examples
 
-#### Typescript
-All guard composition functions require the return type as generic argument, if the guard returns true (validations match) this type is then guaranteed according as far as typescript and the transpiled javascript are concerned.
+### any
 
-```ts
-import { isArrayOfType, isArrayOfSize, isString, isNumber, all, any } from '@konfirm/guard';
+▸ **any**<`T`\>(...`checks`): [`Guard`](#guard)<`T`\>
 
-type Mixed = string | number;
-type MixedList = [Mixed, Mixed?];
-const isArrayWithSizeBetweenOneAndTwoOfStringsOrNumbers = all<MixedList>(
-	isArrayOfType<Mixed>(any(isString, isNumber)),
-	isArrayOfSize(1, 2)
-);
+Create a guard verifying the given value matches any of the validators
 
-const nope = [0, false];
-const sure = [0, 'hello'];
+#### Type parameters
 
-if (isArrayWithSizeBetweenOneAndTwoOfStringsOrNumbers(nope)) {
-	console.log(`${nope} is an Array containing one to two string or number types`);
-}
-else {
-	console.log(`${nope} is not an Array containing one to two string or number types`);
-}
+| Name |
+| :--- |
+| `T`  |
 
-if (isArrayWithSizeBetweenOneAndTwoOfStringsOrNumbers(sure)) {
-	console.log(`${sure} is an Array containing one to two string or number types`);
-}
-else {
-	console.log(`${sure} is not an Array containing one to two string or number types`);
-}
-```
+#### Parameters
 
-#### Javascript
-```js
-// const { isStructure, isInteger, isGreaterOfEqual, all } = require('@konfirm/guard'); // CommonJS
-import { isStructure, isInteger, isGreaterOfEqual, all } from '@konfirm/guard'; // ES Modules
+| Name        | Type                                                        |
+| :---------- | :---------------------------------------------------------- |
+| `...checks` | [[`Validator`](#validator), ...<[`Validator`](#validator)>] |
 
-const isAtLeast21 = isStructure({
-	age: all(isInteger, isGreaterOrEqual(21)),
-});
-const jane = { name: 'Jane Doe', age: 42 };
-const jimmy = { name: 'Jimmy Doe', age: 17 };
-const ageless = { name: 'No Age' };
+#### Returns
 
-if (isAtLeast21(jane)) {
-	console.log(`${jane} is at least 21`);
-}
-else {
-	console.log(`${jane} is not at least 21`);
-}
+[`Guard`](#guard)<`T`\>
 
-if (isAtLeast21(jimmy)) {
-	console.log(`${jimmy} is at least 21`);
-}
-else {
-	console.log(`${jimmy} is not at least 21`);
-}
 
-if (isAtLeast21(ageless)) {
-	console.log(`${ageless} is at least 21`);
-}
-else {
-	console.log(`${ageless} is not at least 21`);
-}
-```
+### assert
 
-### Assertions
+▸ **assert**<`T`\>(`value`, `message`, ...`rules`): value is T
 
-| export      | arguments                                                      | description            |
-| ----------- | -------------------------------------------------------------- | ---------------------- |
-| `assertion` | `string message, ...rules[Validator, ...Validator]`            | create an assert guard |
-| `assert`    | `any value, string message, ...rules[Validator, ...Validator]` | assert                 |
+Guard asserting the given value to match the conditions or throw an AssertionError otherwise
+
+#### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+#### Parameters
+
+| Name       | Type                                                        |
+| :--------- | :---------------------------------------------------------- |
+| `value`    | `any`                                                       |
+| `message`  | `string`                                                    |
+| `...rules` | [[`Validator`](#validator), ...<[`Validator`](#validator)>] |
+
+#### Returns
+
+value is T
+
+
+### assertion
+
+▸ **assertion**<`T`\>(`message`, ...`rules`): [`Guard`](#guard)<`T`\>
+
+Create an assertion guard, throwing an AssertionError with the provided message if any validator failes
+
+#### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+#### Parameters
+
+| Name       | Type                                                        |
+| :--------- | :---------------------------------------------------------- |
+| `message`  | `string`                                                    |
+| `...rules` | [[`Validator`](#validator), ...<[`Validator`](#validator)>] |
+
+#### Returns
+
+[`Guard`](#guard)<`T`\>
+
+
+### is
+
+▸ **is**<`T`\>(`type`): [`Guard`](#guard)<`T`\>
+
+Create a guard verifying the given value matches the specified type
+
+#### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+#### Parameters
+
+| Name   | Type                                                                                                                               |
+| :----- | :--------------------------------------------------------------------------------------------------------------------------------- |
+| `type` | ``"string"`` \| ``"number"`` \| ``"bigint"`` \| ``"boolean"`` \| ``"symbol"`` \| ``"undefined"`` \| ``"object"`` \| ``"function"`` |
+
+#### Returns
+
+[`Guard`](#guard)<`T`\>
+
+
+### isArray
+
+▸ `Const` **isArray**(`value`): value is unknown[]
+
+Guard verifying the value is a array
+
+#### Parameters
+
+| Name    | Type  |
+| :------ | :---- |
+| `value` | `any` |
+
+#### Returns
+
+value is unknown[]
+
+
+### isArrayOfSize
+
+▸ **isArrayOfSize**<`T`\>(`min`, `max?`): [`Guard`](#guard)<`T`\>
+
+Guard verifying the value to be an array with a length between the given boundaries
+
+#### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+#### Parameters
+
+| Name  | Type     | Default value |
+| :---- | :------- | :------------ |
+| `min` | `number` | `undefined`   |
+| `max` | `number` | `Infinity`    |
+
+#### Returns
+
+[`Guard`](#guard)<`T`\>
+
+
+### isArrayOfType
+
+▸ **isArrayOfType**<`T`\>(...`validators`): [`Guard`](#guard)<`T`\>
+
+Guard verifying the value to be an array containing only elements matching the validators
+
+#### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+#### Parameters
+
+| Name            | Type                                                        |
+| :-------------- | :---------------------------------------------------------- |
+| `...validators` | [[`Validator`](#validator), ...<[`Validator`](#validator)>] |
+
+#### Returns
+
+[`Guard`](#guard)<`T`\>
+
+
+### isBigInt
+
+▸ `Const` **isBigInt**(`value`): value is BigInt
+
+Guard verifying the value is a bigint
+
+#### Parameters
+
+| Name    | Type  |
+| :------ | :---- |
+| `value` | `any` |
+
+#### Returns
+
+value is BigInt
+
+
+### isBoolean
+
+▸ `Const` **isBoolean**(`value`): value is boolean
+
+Guard verifying the value is a boolean
+
+#### Parameters
+
+| Name    | Type  |
+| :------ | :---- |
+| `value` | `any` |
+
+#### Returns
+
+value is boolean
+
+
+### isFloat
+
+▸ **isFloat**<`T`\>(`value`): value is T
+
+Guard verifying the value to be a float number
+
+#### Type parameters
+
+| Name | Type     |
+| :--- | :------- |
+| `T`  | `number` |
+
+#### Parameters
+
+| Name    | Type  |
+| :------ | :---- |
+| `value` | `any` |
+
+#### Returns
+
+value is T
+
+
+### isFunction
+
+▸ `Const` **isFunction**(`value`): value is Function
+
+Guard verifying the value is a function
+
+#### Parameters
+
+| Name    | Type  |
+| :------ | :---- |
+| `value` | `any` |
+
+#### Returns
+
+value is Function
+
+
+### isGreater
+
+▸ **isGreater**<`T`\>(`than`): [`Guard`](#guard)<`T`\>
+
+Create a guard matching numbers greater than the provided value
+
+#### Type parameters
+
+| Name | Type     |
+| :--- | :------- |
+| `T`  | `number` |
+
+#### Parameters
+
+| Name   | Type     |
+| :----- | :------- |
+| `than` | `number` |
+
+#### Returns
+
+[`Guard`](#guard)<`T`\>
+
+
+### isGreaterOrEqual
+
+▸ **isGreaterOrEqual**<`T`\>(`than`): [`Guard`](#guard)<`T`\>
+
+Create a guard matching numbers greater than or equal to the provided value
+
+#### Type parameters
+
+| Name | Type     |
+| :--- | :------- |
+| `T`  | `number` |
+
+#### Parameters
+
+| Name   | Type     |
+| :----- | :------- |
+| `than` | `number` |
+
+#### Returns
+
+[`Guard`](#guard)<`T`\>
+
+
+### isInstanceOf
+
+▸ **isInstanceOf**(`type`): [`Guard`](#guard)<typeof `type`\>
+
+Creates a guard verifying the value is an object and an instance of the given class
+
+#### Parameters
+
+| Name   | Type                              |
+| :----- | :-------------------------------- |
+| `type` | (...`args`: `any`[]) => `unknown` |
+
+#### Returns
+
+[`Guard`](#guard)<typeof `type`\>
+
+
+### isInteger
+
+▸ **isInteger**<`T`\>(`value`): value is T
+
+Guard verifying the value to be an integer number
+
+#### Type parameters
+
+| Name | Type     |
+| :--- | :------- |
+| `T`  | `number` |
+
+#### Parameters
+
+| Name    | Type  |
+| :------ | :---- |
+| `value` | `any` |
+
+#### Returns
+
+value is T
+
+
+### isKey
+
+▸ **isKey**<`T`\>(`key`): [`Guard`](#guard)<`T`\>
+
+Creates a guard verifying the value is an object and has the given key
+
+#### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+#### Parameters
+
+| Name  | Type  |
+| :---- | :---- |
+| `key` | `Key` |
+
+#### Returns
+
+[`Guard`](#guard)<`T`\>
+
+
+### isKeyOfType
+
+▸ **isKeyOfType**<`T`\>(`key`, ...`validators`): [`Guard`](#guard)<`T`\>
+
+Creates a guard verifying the value is an object and has the given key matching the validators
+
+#### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+#### Parameters
+
+| Name            | Type                        |
+| :-------------- | :-------------------------- |
+| `key`           | `Key`                       |
+| `...validators` | [`Validator`](#validator)[] |
+
+#### Returns
+
+[`Guard`](#guard)<`T`\>
+
+
+### isLess
+
+▸ **isLess**<`T`\>(`than`): [`Guard`](#guard)<`T`\>
+
+Create a guard matching numbers less than the provided value
+
+#### Type parameters
+
+| Name | Type     |
+| :--- | :------- |
+| `T`  | `number` |
+
+#### Parameters
+
+| Name   | Type     |
+| :----- | :------- |
+| `than` | `number` |
+
+#### Returns
+
+[`Guard`](#guard)<`T`\>
+
+
+### isLessOrEqual
+
+▸ **isLessOrEqual**<`T`\>(`than`): [`Guard`](#guard)<`T`\>
+
+Create a guard matching numbers less than or equal to the provided value
+
+#### Type parameters
+
+| Name | Type     |
+| :--- | :------- |
+| `T`  | `number` |
+
+#### Parameters
+
+| Name   | Type     |
+| :----- | :------- |
+| `than` | `number` |
+
+#### Returns
+
+[`Guard`](#guard)<`T`\>
+
+
+### isNULL
+
+▸ `Const` **isNULL**(`value`): value is null
+
+Guard verifying the value is a null
+
+#### Parameters
+
+| Name    | Type  |
+| :------ | :---- |
+| `value` | `any` |
+
+#### Returns
+
+value is null
+
+
+### isNegative
+
+▸ **isNegative**<`T`\>(`value`): value is T
+
+Guard verifying the value to be a negative number
+
+#### Type parameters
+
+| Name | Type     |
+| :--- | :------- |
+| `T`  | `number` |
+
+#### Parameters
+
+| Name    | Type  |
+| :------ | :---- |
+| `value` | `any` |
+
+#### Returns
+
+value is T
+
+
+### isNumber
+
+▸ `Const` **isNumber**(`value`): value is number
+
+Guard verifying the value is a number
+
+#### Parameters
+
+| Name    | Type  |
+| :------ | :---- |
+| `value` | `any` |
+
+#### Returns
+
+value is number
+
+
+### isObject
+
+▸ `Const` **isObject**(`value`): value is unknown
+
+Guard verifying the value is a object
+
+#### Parameters
+
+| Name    | Type  |
+| :------ | :---- |
+| `value` | `any` |
+
+#### Returns
+
+value is unknown
+
+
+### isOptionalKeyOfType
+
+▸ **isOptionalKeyOfType**<`T`\>(`key`, ...`validators`): [`Guard`](#guard)<`T`\>
+
+Creates a guard verifying the value is an object and doesn't have the key or has the given key matching the validators
+
+#### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+#### Parameters
+
+| Name            | Type                        |
+| :-------------- | :-------------------------- |
+| `key`           | `Key`                       |
+| `...validators` | [`Validator`](#validator)[] |
+
+#### Returns
+
+[`Guard`](#guard)<`T`\>
+
+
+### isPositive
+
+▸ **isPositive**<`T`\>(`value`): value is T
+
+Guard verifying the value to be a positive number
+
+#### Type parameters
+
+| Name | Type     |
+| :--- | :------- |
+| `T`  | `number` |
+
+#### Parameters
+
+| Name    | Type  |
+| :------ | :---- |
+| `value` | `any` |
+
+#### Returns
+
+value is T
+
+
+### isStrictStructure
+
+▸ **isStrictStructure**<`T`\>(`struct`, ...`options`): [`Guard`](#guard)<`T`\>
+
+Creates a guard verifying the value is an object matching exactly the structure
+
+#### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+#### Parameters
+
+| Name         | Type                 |
+| :----------- | :------------------- |
+| `struct`     | `Object`             |
+| `...options` | (`Key` \| `Key`[])[] |
+
+#### Returns
+
+[`Guard`](#guard)<`T`\>
+
+
+### isString
+
+▸ `Const` **isString**(`value`): value is string
+
+Guard verifying the value is a string
+
+#### Parameters
+
+| Name    | Type  |
+| :------ | :---- |
+| `value` | `any` |
+
+#### Returns
+
+value is string
+
+
+### isStringWithPattern
+
+▸ **isStringWithPattern**<`T`\>(`pattern`): [`Guard`](#guard)<`T`\>
+
+Guard verifying the value to be a string which matches the given pattern
+
+#### Type parameters
+
+| Name | Type     |
+| :--- | :------- |
+| `T`  | `string` |
+
+#### Parameters
+
+| Name      | Type     |
+| :-------- | :------- |
+| `pattern` | `RegExp` |
+
+#### Returns
+
+[`Guard`](#guard)<`T`\>
+
+
+### isStructure
+
+▸ **isStructure**<`T`\>(`struct`, ...`options`): [`Guard`](#guard)<`T`\>
+
+Creates a guard verifying the value is an object matching at least the structure
+
+#### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+#### Parameters
+
+| Name         | Type                                 |
+| :----------- | :----------------------------------- |
+| `struct`     | `Struct`<[`Validator`](#validator)\> |
+| `...options` | (`Key` \| `Key`[])[]                 |
+
+#### Returns
+
+[`Guard`](#guard)<`T`\>
+
+
+### isSymbol
+
+▸ `Const` **isSymbol**(`value`): value is Symbol
+
+Guard verifying the value is a symbol
+
+#### Parameters
+
+| Name    | Type  |
+| :------ | :---- |
+| `value` | `any` |
+
+#### Returns
+
+value is Symbol
+
+
+### isUndefined
+
+▸ `Const` **isUndefined**(`value`): value is undefined
+
+Guard verifying the value is a undefined
+
+#### Parameters
+
+| Name    | Type  |
+| :------ | :---- |
+| `value` | `any` |
+
+#### Returns
+
+value is undefined
+
+
+### not
+
+▸ **not**<`T`\>(...`checks`): [`Guard`](#guard)<`T`\>
+
+Create a guard verifying the given value matches none of the validators
+
+#### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+#### Parameters
+
+| Name        | Type                                                        |
+| :---------- | :---------------------------------------------------------- |
+| `...checks` | [[`Validator`](#validator), ...<[`Validator`](#validator)>] |
+
+#### Returns
+
+[`Guard`](#guard)<`T`\>
+
+## Type aliases
+
+### Float
+
+Ƭ **Float**: `number`
+
+
+### Guard
+
+Ƭ **Guard**<`T`\>: (`value`: `any`) => value is T
+
+#### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+#### Type declaration
+
+▸ (`value`): value is T
+
+##### Parameters
+
+| Name    | Type  |
+| :------ | :---- |
+| `value` | `any` |
+
+##### Returns
+
+value is T
+
+
+### Integer
+
+Ƭ **Integer**: `number`
+
+
+### Negative
+
+Ƭ **Negative**: `number`
+
+
+### Positive
+
+Ƭ **Positive**: `number`
+
+
+### StringWithPattern
+
+Ƭ **StringWithPattern**: `string`
+
+
+### Validator
+
+Ƭ **Validator**: (`value`: `any`) => `boolean`
+
+#### Type declaration
+
+▸ (`value`): `boolean`
+
+##### Parameters
+
+| Name    | Type  |
+| :------ | :---- |
+| `value` | `any` |
+
+##### Returns
+
+`boolean`
+
 
 
 
