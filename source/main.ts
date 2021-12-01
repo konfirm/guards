@@ -6,4 +6,3 @@ export * from './Guards/Object';
 export * from './Guards/Primitive';
 export * from './Guards/String';
 export * from './Guards/Utility';
-export * from './Mapper/Stringifier';

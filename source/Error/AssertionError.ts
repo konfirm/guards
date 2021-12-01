@@ -1,6 +1,4 @@
-import { Stringifier } from "../Mapper/Stringifier";
-
-const stringifier = new Stringifier();
+import { stringify } from "@konfirm/stringify";
 
 export class AssertionError extends Error {
 	constructor(message: string, public value: Array<any>, private trigger?: AssertionError) {
@@ -12,7 +10,7 @@ export class AssertionError extends Error {
 	get reasons(): Array<string> {
 		const { message, value, trigger } = this;
 
-		return (trigger?.reasons || []).concat(`${stringifier.map(value)} ${message}`);
+		return (trigger?.reasons || []).concat(`${stringify(value)} ${message}`);
 	}
 
 	get cause(): Array<{ value, message }> {

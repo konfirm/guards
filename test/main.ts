@@ -37,7 +37,6 @@ test('main - exports', (t) => {
 		'any',
 		'all',
 		'not',
-		'Stringifier'
 	];
 
 	t.deepEqual(Object.keys(Main), expect, `exports ${expect.join(', ')}`);

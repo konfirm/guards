@@ -6,11 +6,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] -
 
+**BREAKING** This is a breaking release, a lot of function flags/types have been explicitly added and changed. Please refer to [the `@konfirm/stringify` mappings](https://www.npmjs.com/package/@konfirm/stringify#mappings) for the various types.
+
 ### Added
+- **BREAKING** - Added a lot of function flags: `Async`, `Generator`, `Shorthand` (as object member)
 ### Changed
+- **BREAKING** - `<empty string>` > `EmptyString`
+- **BREAKING** - `undefined` > `Undefined`
+- **BREAKING** - `class <name>` > `Class <name>`
+- **BREAKING** - `anonymous class` > `AnonymousClass`
+- **BREAKING** - `arrow function` > `ArrowFunction`
+- **BREAKING** - `anonymous function` > `AnonymousFunction`
 ### Deprecated
 ### Removed
+- **BREAKING** `Stringifier`, is now replaced by the [`@konfirm/stringify`](https://github.com/konfirm/stringify) package
 ### Fixed
+
 ### Security
 
 ## [1.2.0] - 2021-11-29
