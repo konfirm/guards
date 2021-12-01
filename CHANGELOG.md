@@ -6,10 +6,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] -
 
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+
+## [2.0.0] - 2021-11-30
+
 **BREAKING** This is a breaking release, a lot of function flags/types have been explicitly added and changed. Please refer to [the `@konfirm/stringify` mappings](https://www.npmjs.com/package/@konfirm/stringify#mappings) for the various types.
 
 ### Added
 - **BREAKING** - Added a lot of function flags: `Async`, `Generator`, `Shorthand` (as object member)
+
 ### Changed
 - **BREAKING** - `<empty string>` > `EmptyString`
 - **BREAKING** - `undefined` > `Undefined`
@@ -17,12 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **BREAKING** - `anonymous class` > `AnonymousClass`
 - **BREAKING** - `arrow function` > `ArrowFunction`
 - **BREAKING** - `anonymous function` > `AnonymousFunction`
-### Deprecated
+
 ### Removed
 - **BREAKING** `Stringifier`, is now replaced by the [`@konfirm/stringify`](https://github.com/konfirm/stringify) package
-### Fixed
 
-### Security
 
 ## [1.2.0] - 2021-11-29
 
@@ -48,4 +57,9 @@ A couple of iterations figuring out the correct course of Github Actions
 
 _Initial release_
 
-[Unreleased]: https://github.com/konfirm/guards/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/konfirm/guards/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/konfirm/guards/compare/v1.2.0...v2.0.0
+[1.2.0]: https://github.com/konfirm/guards/compare/v1.1.0...v1.2.0
+[1.1.0]: https://github.com/konfirm/guards/compare/v1.0.4...v1.1.0
+[1.0.4]: https://github.com/konfirm/guards/compare/v1.0.0...v1.0.4
+[1.0.0]: https://github.com/konfirm/guards/releases/tag/v1.0.0
