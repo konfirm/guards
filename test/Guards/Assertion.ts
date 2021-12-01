@@ -89,10 +89,10 @@ test('Guards/Assertion - nested assertions', (t) => {
 
 	const unnamed = {
 		message: 'expected youth structure',
-		reason: '{name:<empty string>,age:17} expected youth structure​←​<empty string> expected name',
+		reason: '{name:EmptyString,age:17} expected youth structure​←​EmptyString expected name',
 		reasons: [
-			'<empty string> expected name',
-			'{name:<empty string>,age:17} expected youth structure',
+			'EmptyString expected name',
+			'{name:EmptyString,age:17} expected youth structure',
 		],
 		cause: [
 			{ value: { name: '', age: 17 }, message: 'expected youth structure' },
