@@ -6,6 +6,13 @@
 	"main": "dist/guard.cjs.js",
 	"module": "dist/guard.es.js",
 	"types": "dist/guard.d.ts",
+	"exports": {
+		".": {
+			"types": "./source/main.ts",
+			"import": "./dist/guard.es.js",
+			"require": "./dist/guard.cjs.js"
+		}
+	},
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/konfirm/guards.git"
