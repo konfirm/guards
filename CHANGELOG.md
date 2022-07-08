@@ -13,6 +13,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 
+## [2.0.1] - 2022-07-08
+
+### Changed
+- updated dependencies
+- package.json now also contains exports
+
 
 ## [2.0.0] - 2021-11-30
 
@@ -57,7 +63,8 @@ A couple of iterations figuring out the correct course of Github Actions
 
 _Initial release_
 
-[Unreleased]: https://github.com/konfirm/guards/compare/v2.0.0...HEAD
+[Unreleased]: https://github.com/konfirm/guards/compare/v2.0.1...HEAD
+[2.0.1]: https://github.com/konfirm/guards/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/konfirm/guards/compare/v1.2.0...v2.0.0
 [1.2.0]: https://github.com/konfirm/guards/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/konfirm/guards/compare/v1.0.4...v1.1.0
