@@ -70,11 +70,6 @@ Or use your favorite package manager to install `@konfirm/guard`
 
 Create a guard verifying the given value matches all of the validators
 
-#### Type parameters
-
-| Name |
-| :--- |
-| `T`  |
 
 #### Parameters
 
@@ -93,11 +88,6 @@ Create a guard verifying the given value matches all of the validators
 
 Create a guard verifying the given value matches any of the validators
 
-#### Type parameters
-
-| Name |
-| :--- |
-| `T`  |
 
 #### Parameters
 
@@ -116,11 +106,6 @@ Create a guard verifying the given value matches any of the validators
 
 Guard asserting the given value to match the conditions or throw an AssertionError otherwise
 
-#### Type parameters
-
-| Name |
-| :--- |
-| `T`  |
 
 #### Parameters
 
@@ -139,13 +124,8 @@ value is T
 
 ▸ **assertion**<`T`\>(`message`, ...`rules`): [`Guard`](#guard)<`T`\>
 
-Create an assertion guard, throwing an AssertionError with the provided message if any validator failes
+Create an assertion guard, throwing an AssertionError with the provided message if any validator fails
 
-#### Type parameters
-
-| Name |
-| :--- |
-| `T`  |
 
 #### Parameters
 
@@ -165,11 +145,6 @@ Create an assertion guard, throwing an AssertionError with the provided message 
 
 Create a guard verifying the given value matches the specified type
 
-#### Type parameters
-
-| Name |
-| :--- |
-| `T`  |
 
 #### Parameters
 
@@ -205,11 +180,6 @@ value is unknown[]
 
 Guard verifying the value to be an array with a length between the given boundaries
 
-#### Type parameters
-
-| Name |
-| :--- |
-| `T`  |
 
 #### Parameters
 
@@ -229,11 +199,6 @@ Guard verifying the value to be an array with a length between the given boundar
 
 Guard verifying the value to be an array containing only elements matching the validators
 
-#### Type parameters
-
-| Name |
-| :--- |
-| `T`  |
 
 #### Parameters
 
@@ -412,11 +377,6 @@ value is T
 
 Creates a guard verifying the value is an object and has the given key
 
-#### Type parameters
-
-| Name |
-| :--- |
-| `T`  |
 
 #### Parameters
 
@@ -435,11 +395,6 @@ Creates a guard verifying the value is an object and has the given key
 
 Creates a guard verifying the value is an object and has the given key matching the validators
 
-#### Type parameters
-
-| Name |
-| :--- |
-| `T`  |
 
 #### Parameters
 
@@ -579,11 +534,6 @@ value is unknown
 
 Creates a guard verifying the value is an object and doesn't have the key or has the given key matching the validators
 
-#### Type parameters
-
-| Name |
-| :--- |
-| `T`  |
 
 #### Parameters
 
@@ -626,11 +576,6 @@ value is T
 
 Creates a guard verifying the value is an object matching exactly the structure
 
-#### Type parameters
-
-| Name |
-| :--- |
-| `T`  |
 
 #### Parameters
 
@@ -690,11 +635,6 @@ Guard verifying the value to be a string which matches the given pattern
 
 Creates a guard verifying the value is an object matching at least the structure
 
-#### Type parameters
-
-| Name |
-| :--- |
-| `T`  |
 
 #### Parameters
 
@@ -748,11 +688,6 @@ value is undefined
 
 Create a guard verifying the given value matches none of the validators
 
-#### Type parameters
-
-| Name |
-| :--- |
-| `T`  |
 
 #### Parameters
 
@@ -775,11 +710,6 @@ Create a guard verifying the given value matches none of the validators
 
 Ƭ **Guard**<`T`\>: (`value`: `any`) => value is T
 
-#### Type parameters
-
-| Name |
-| :--- |
-| `T`  |
 
 #### Type declaration
 
@@ -838,7 +768,7 @@ value is T
 
 
 ## License
-MIT License Copyright (c) 2021 Rogier Spieker (Konfirm)
+MIT License Copyright (c) 2021-2023 Rogier Spieker (Konfirm)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

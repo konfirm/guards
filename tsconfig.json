@@ -7,6 +7,6 @@
 		"esModuleInterop": true,
 		"outDir": "dist/",
 		"target": "es6",
-		"moduleResolution": "NodeNext"
+		"moduleResolution": "Node"
 	}
 }
